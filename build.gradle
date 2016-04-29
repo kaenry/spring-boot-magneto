@@ -1,0 +1,39 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
+	}
+}
+apply plugin: 'spring-boot'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+
+version = '0.1'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+[compileJava,compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-web"
+	compile("org.springframework.boot:spring-boot-devtools")
+
+//	compile 'mysql:mysql-connector-java:5.1.34'
+
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+	testRuntime("org.hsqldb:hsqldb")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
+
+//applicationDefaultJvmArgs = [ "-Xmx3550m","-Xms3550m","-Xmn2g","-Xss256k"]
