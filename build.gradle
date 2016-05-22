@@ -1,11 +1,15 @@
 buildscript {
+	ext {
+		springBootVersion = '1.3.5.RELEASE'
+	}
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
+
 apply plugin: 'spring-boot'
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -24,9 +28,13 @@ repositories {
 
 dependencies {
 	compile "org.springframework.boot:spring-boot-starter-web"
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile("org.springframework.boot:spring-boot-devtools")
 
 //	compile 'mysql:mysql-connector-java:5.1.34'
+
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testRuntime("org.hsqldb:hsqldb")
