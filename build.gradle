@@ -27,17 +27,17 @@ repositories {
 }
 
 dependencies {
-	compile "org.springframework.boot:spring-boot-starter-web"
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile("org.springframework.boot:spring-boot-devtools")
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'org.springframework.boot:spring-boot-devtools'
 
 //	compile 'mysql:mysql-connector-java:5.1.34'
 
-	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-	testCompile("org.springframework.boot:spring-boot-starter-test")
-	testRuntime("org.hsqldb:hsqldb")
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testRuntime 'org.hsqldb:hsqldb'
 }
 
 task wrapper(type: Wrapper) {
