@@ -6,3 +6,6 @@ code template with spring boot
 how to run: `gradle build && gradle bootRun`
 
 `data.sql` for init user db with `admin/admin`; just for demo
+## TODO
+
+- [x] spring security login
