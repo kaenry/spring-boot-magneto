@@ -1,2 +1,4 @@
 # profile to use, dev for development
-spring.profiles.active=dev
+spring:
+  profiles:
+    active: dev
