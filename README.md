@@ -9,3 +9,5 @@ how to run: `gradle build && gradle bootRun`
 ## TODO
 
 - [x] spring security login
+- [x] spring security oauth2 github login
+- [ ] spring security oauth2 server
