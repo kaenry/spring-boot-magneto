@@ -19,6 +19,13 @@ spring:
 
 # basic security
 security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      scope: read,write
+      auto-approve-scopes: '.*'
+      grant-type: password
   basic:
     enabled: false
 
