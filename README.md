@@ -11,3 +11,7 @@ how to run: `gradle build && gradle bootRun`
 - [x] spring security login
 - [x] spring security oauth2 github login
 - [x] spring security oauth2 server
+- [ ] custom oauth2 server
+- [ ] RESTFULL?
+- [ ] kill thymleaf and use vuejs?
+- [ ] chat room for WebSocket support
