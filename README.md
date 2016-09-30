@@ -1,5 +1,5 @@
 # spring-boot-magneto
-code template with spring boot
+coding with spring boot
 > dependency `gradle`: >2.12
 
 
