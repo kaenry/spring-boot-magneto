@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
- * Created by kaenry on 2016/9/8.
+ *
+ * @author kaenry
+ * @date 2016/9/8
  * UserRestController
  */
 @RestController
@@ -28,8 +29,8 @@ public class UserRestController {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public RestResult<List<User>> all() {
-        List<User> all = userService.findAll();
+    public RestResult<Iterable<User>> all() {
+        Iterable<User> all = userService.findAll();
         return RestResultGenerator.genSuccessResult(all);
     }
 
@@ -53,7 +54,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public RestResult<User> get(@PathVariable Long id) throws Exception {
-        User user = userService.findById(id);
+        User user = userService.findById(id).get();
         return RestResultGenerator.genSuccessResult(user);
     }
 
@@ -78,7 +79,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public RestResult<User> updateAll(@PathVariable Long id, @Valid @RequestBody User newUser) throws Exception {
-        User user = userService.findById(id);
+        User user = userService.findById(id).get();
         // copy all new user props to user except id
         BeanUtils.copyProperties(newUser, user, "id");
         user = userService.save(user);
@@ -94,7 +95,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     public RestResult<User> update(@PathVariable Long id, @Valid @RequestBody User newUser) throws Exception {
-        User user = userService.findById(id);
+        User user = userService.findById(id).get();
         // copy all new user props to user except null props
         BeanUtils.copyProperties(newUser, user, Utils.getNullPropertyNames(newUser));
         user = userService.save(user);

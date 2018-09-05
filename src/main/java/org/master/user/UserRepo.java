@@ -1,11 +1,12 @@
 package org.master.user;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by kaenry on 2016/6/17.
  * UserRepo
  */
-public interface UserRepo extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
+@Repository
+public interface UserRepo extends CrudRepository<User, Long> {
 }
