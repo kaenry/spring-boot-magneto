@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 /**
- * Created by kaenry on 2016/6/17.
+ *
+ * @author kaenry
+ * @date 2016/6/17
  * UserController
  */
 @RestController
@@ -20,7 +22,7 @@ public class UserController {
     IUserService userService;
 
     @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable Long id){
+    public User findById(@PathVariable Integer id){
 
         return userService.findById(id);
     }

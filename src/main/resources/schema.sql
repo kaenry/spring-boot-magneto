@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS api_user (id INTEGER, username VARCHAR(64), password VARCHAR(225), role VARCHAR(64));

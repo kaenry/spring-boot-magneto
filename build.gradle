@@ -10,10 +10,6 @@ buildscript {
 	}
 }
 
-ext {
-	jdbcVersion = '1.0.0.M2'
-}
-
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
@@ -37,11 +33,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web') {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 	}
-	compile 'org.springframework.data:spring-data-commons'
 	compile 'org.springframework.boot:spring-boot-starter-jdbc'
 //	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.boot:spring-boot-devtools'
-	compile 'org.projectlombok:lombok'
+//	compile 'org.projectlombok:lombok'
 
 //	compile 'org.springframework.security.oauth:spring-security-oauth2'
 

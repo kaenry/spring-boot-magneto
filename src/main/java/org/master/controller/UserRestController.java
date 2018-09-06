@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  *
@@ -29,8 +30,8 @@ public class UserRestController {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public RestResult<Iterable<User>> all() {
-        Iterable<User> all = userService.findAll();
+    public RestResult<List<User>> all() {
+        List<User> all = userService.findAll();
         return RestResultGenerator.genSuccessResult(all);
     }
 
@@ -41,9 +42,9 @@ public class UserRestController {
      * @throws Exception valid check
      */
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public RestResult<User> save(@Valid @RequestBody User user) throws Exception {
-        User save = userService.save(user);
-        return RestResultGenerator.genSuccessResult(save);
+    public RestResult save(@Valid @RequestBody User user) throws Exception {
+        userService.save(user);
+        return RestResultGenerator.genSuccessResult();
     }
 
     /**
@@ -53,8 +54,8 @@ public class UserRestController {
      * @throws Exception
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public RestResult<User> get(@PathVariable Long id) throws Exception {
-        User user = userService.findById(id).get();
+    public RestResult<User> get(@PathVariable Integer id) throws Exception {
+        User user = userService.findById(id);
         return RestResultGenerator.genSuccessResult(user);
     }
 
@@ -65,7 +66,7 @@ public class UserRestController {
      * @throws Exception
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public RestResult delete(@PathVariable Long id) throws Exception {
+    public RestResult delete(@PathVariable Integer id) throws Exception {
         userService.delete(id);
         return RestResultGenerator.genSuccessResult();
     }
@@ -78,11 +79,11 @@ public class UserRestController {
      * @throws Exception
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public RestResult<User> updateAll(@PathVariable Long id, @Valid @RequestBody User newUser) throws Exception {
-        User user = userService.findById(id).get();
+    public RestResult<User> updateAll(@PathVariable Integer id, @Valid @RequestBody User newUser) throws Exception {
+        User user = userService.findById(id);
         // copy all new user props to user except id
         BeanUtils.copyProperties(newUser, user, "id");
-        user = userService.save(user);
+        userService.save(user);
         return RestResultGenerator.genSuccessResult(user);
     }
 
@@ -94,11 +95,11 @@ public class UserRestController {
      * @throws Exception
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-    public RestResult<User> update(@PathVariable Long id, @Valid @RequestBody User newUser) throws Exception {
-        User user = userService.findById(id).get();
+    public RestResult<User> update(@PathVariable Integer id, @Valid @RequestBody User newUser) throws Exception {
+        User user = userService.findById(id);
         // copy all new user props to user except null props
         BeanUtils.copyProperties(newUser, user, Utils.getNullPropertyNames(newUser));
-        user = userService.save(user);
+        userService.save(user);
         return RestResultGenerator.genSuccessResult(user);
     }
 }

@@ -1,29 +1,23 @@
 package org.master.user;
 
-import lombok.Data;
-
-import java.io.Serializable;
-
 /**
- * Created by kaenry on 2016/6/17.
+ *
+ * @author kaenry
+ * @date 2016/6/17
  * User
  */
-@Data
-public class User implements Serializable {
 
-    private Long id;
+public class User {
 
-    private String username;
+    private Integer id;
 
-    private String password;
+    private String username, password, role;
 
-    private String role;
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
