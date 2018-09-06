@@ -1,99 +1,49 @@
 package org.master.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
- * Created by kaenry on 2016/6/17.
+ *
+ * @author kaenry
+ * @date 2016/6/17
  * UserService
  */
 @Service
-public class UserService implements IUserService, UserDetailsService {
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepo userRepo;
 
+    @Transactional
     @Override
-    public User save(User entity) throws Exception {
-        return userRepo.save(entity);
+    public void save(User entity) {
+        userRepo.save(entity);
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Integer id) {
         userRepo.delete(id);
     }
 
     @Override
-    public void delete(User entity) throws Exception {
-        userRepo.delete(entity);
-    }
-
-    @Override
-    public User findById(Long id) {
-        return userRepo.findOne(id);
-    }
-
-    @Override
-    public User findBySample(User sample) {
-        return userRepo.findOne(whereSpec(sample));
+    public User findById(Integer id) {
+        return userRepo.findById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return userRepo.findAll();
+
+        Iterable<User> users = userRepo.findAll();
+        return StreamSupport.stream(users.spliterator(), false).collect(Collectors.toList());
     }
 
-    @Override
-    public List<User> findAll(User sample) {
-        return userRepo.findAll(whereSpec(sample));
-    }
-
-    @Override
-    public Page<User> findAll(PageRequest pageRequest) {
-        return userRepo.findAll(pageRequest);
-    }
-
-    @Override
-    public Page<User> findAll(User sample, PageRequest pageRequest) {
-        return userRepo.findAll(whereSpec(sample), pageRequest);
-    }
-
-    private Specification<User> whereSpec(final User sample){
-        return (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            if (sample.getId()!=null){
-                predicates.add(cb.equal(root.<Long>get("id"), sample.getId()));
-            }
-
-            if (StringUtils.hasLength(sample.getUsername())){
-                predicates.add(cb.equal(root.<String>get("username"),sample.getUsername()));
-            }
-
-            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-        };
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User sample = new User();
-        sample.setUsername(username);
-        User user = findBySample(sample);
-
-        if( user == null ){
-            throw new UsernameNotFoundException(String.format("User with username=%s was not found", username));
-        }
-
-        return user;
-    }
 }

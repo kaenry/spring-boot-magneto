@@ -1,18 +1,20 @@
 package org.master.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by kaenry on 2016/5/22.
+ *
+ * @author kaenry
+ * @date 2016/5/22
  * PublicController
  */
-@Controller
+@RestController
 public class PublicController {
 
     @RequestMapping("/")
     public String index() {
 
-        return "index";
+        return "Hello, Master World.";
     }
 }

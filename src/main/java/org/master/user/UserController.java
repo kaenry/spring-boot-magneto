@@ -1,24 +1,29 @@
 package org.master.user;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
+import java.util.Optional;
 
 /**
- * Created by kaenry on 2016/6/17.
+ *
+ * @author kaenry
+ * @date 2016/6/17
  * UserController
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @RequestMapping("/info")
-    public String info(Principal principal, ModelMap modelMap){
-        String name = principal.getName();
-        modelMap.put("name", name);
+    @Autowired
+    IUserService userService;
 
-        return "user/info";
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Integer id){
+
+        return userService.findById(id);
     }
 }

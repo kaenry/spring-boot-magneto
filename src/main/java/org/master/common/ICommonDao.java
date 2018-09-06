@@ -3,15 +3,15 @@ package org.master.common;
 import java.util.List;
 
 /**
- *
- * @author kaenry
- * @date 2016/6/17
- * ICommonService
- * common interface
+ * T entity type
+ * E primary id key type
+ * @author kevinzou
+ * @date 2018/9/6
+ * ICommonDao
  */
-public interface ICommonService<T, E> {
+public interface ICommonDao<T, E> {
     /**
-     * save entity
+     * save
      * @param entity
      * @return
      * @throws Exception
@@ -26,6 +26,14 @@ public interface ICommonService<T, E> {
     void delete(E id) throws Exception;
 
     /**
+     * modify
+     * @param entity
+     * @return
+     * @throws Exception
+     */
+    void update (T entity) throws Exception;
+
+    /**
      * find by id
      * @param id
      * @return
@@ -33,8 +41,9 @@ public interface ICommonService<T, E> {
     T findById(E id);
 
     /**
-     * find all entities
+     * find all
      * @return
      */
     List<T> findAll();
+
 }

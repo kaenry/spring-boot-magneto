@@ -1,44 +1,23 @@
 package org.master.user;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-
 /**
- * Created by kaenry on 2016/6/17.
+ *
+ * @author kaenry
+ * @date 2016/6/17
  * User
  */
-@Entity
-@DynamicUpdate
-public class User implements Serializable, UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class User {
 
-    @NotEmpty
-    private String username;
+    private Integer id;
 
-    @NotEmpty
-    private String password;
+    private String username, password, role;
 
-    private String role;
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,33 +25,8 @@ public class User implements Serializable, UserDetails {
         return username;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(getRole()));
     }
 
     public String getPassword() {
