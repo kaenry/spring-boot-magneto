@@ -1,5 +1,5 @@
-FROM gradle:4.10.0-jre8-alpine
+FROM gradle:4.10.0-jdk8-alpine
 
-ADD --chown=gradle . ./
-
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
 RUN ls -al && gradle jar --info
