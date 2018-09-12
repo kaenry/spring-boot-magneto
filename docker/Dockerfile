@@ -4,4 +4,4 @@ COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle bootJar
 USER root
-CMD java -Dspring.profiles.active=${profile} -jar build/libs/magneto-service-2.0.0.jar
+CMD java -Dspring.profiles.active=${RPOFILE} -jar build/libs/${SERVICE_NAME}.jar
