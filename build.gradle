@@ -16,7 +16,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 bootJar {
-	baseName = 'magneto-service'
+	archiveName = project.name.concat('.jar')
 	version = '2.0.0'
 }
 
